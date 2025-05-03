@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default"
+            *ngFor="let contact of contacts">
+            <div class="panel-body clearfix">
+                <div class="pull-left">
+                    <h3 class="list-group-heading">{{ contact.name }}</h3>
+                </div>
+                <span class="pull-right">
+                    <img [src]="contact.imageUrl"
+                        [alt]="contact.name"
+                        class="img-responsive"
+                        >
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
