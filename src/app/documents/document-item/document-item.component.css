@@ -1,9 +1,26 @@
-.documentDiv {
-    width: 9rem;
+/* .documentDiv {
+    width: 100%;
+    max-width: 20rem;
+    min-height: 11rem;
+    margin: 0.5rem;
     height: 11rem;
     margin: 2px;
     font-size: 1.3rem;
     border: solid thin darkgrey;
+    padding: .5rem;    
+    display: inline-block;    
+    word-wrap: break-word;
+    
+  } */
+
+  .documentDiv {
+    width: 100%;
+    width: 9rem;
+    height: 15rem;
+    margin: 2px;
+    font-size: 1.3rem;
+    border: solid thin darkgrey;
     float: left;
-    padding: .25rem
+    padding: .25rem;
+    word-wrap: break-word;
   }

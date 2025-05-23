@@ -2,7 +2,9 @@
 .center-panel {
     margin-left: auto;
     margin-right: auto;
-    width: 38rem;
+    max-width: 38rem;
+    width: 100%;
+    padding: 0 1rem;
   }
   
   .title {
