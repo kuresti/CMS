@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Document } from '../document.model';
 import { DocumentService } from '../document.service';
@@ -9,7 +9,7 @@ import { DocumentService } from '../document.service';
   templateUrl: './documents-list.component.html',
   styleUrl: './documents-list.component.css'
 })
-export class DocumentsListComponent {
+export class DocumentsListComponent implements OnInit {
  
 
   documents: Document[] = [];
@@ -18,9 +18,13 @@ export class DocumentsListComponent {
 
   ngOnInit() {
     this.documents = this.documentService.getDocuments();
+    this.documentService.documentChangedEvent.subscribe(
+      (documents: Document[]) => {
+        this.documents = documents;
+      }
+    )
   }
 
- onSelectedDocument(document: Document){
-  this.documentService.documentSelectedEvent.emit(document);
- }
+
+ 
 }
