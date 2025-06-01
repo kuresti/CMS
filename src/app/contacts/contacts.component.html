@@ -3,7 +3,7 @@
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
                 <h1>Contacts</h1>
-                <a routerLink="/contacts" class="btn btn-success btn-lg pull-right">New Contact</a>
+                <a [routerLink]="['new']" class="btn btn-success btn-lg pull-right">New Contact</a>
             </div>
             <div class="panel-body">
                 <cms-contact-list></cms-contact-list>
@@ -12,9 +12,7 @@
         
     </div>
     <div class="col-md-4">
-        <cms-contact-detail
-         *ngIf="selectedContact"
-         [contact]="selectedContact"></cms-contact-detail>
+        <router-outlet></router-outlet>
     </div>
 </div>
 
