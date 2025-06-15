@@ -16,9 +16,19 @@
         </div>
     </div>
 </div>-->
-<cms-contact-item
-    *ngFor="let contact of contacts"
-    [contact]="contact"  
-   >
-</cms-contact-item>
+<div
+    cdkDropList
+    id="contactList"
+    [cdkDropListData]="contacts"
+    [cdkDropListConnectedTo]="['groupContactList']"
+   
+    class="contact-list">
 
+<div
+    *ngFor="let contact of contacts"
+    cdkDrag 
+    [cdkDragData]="contact"
+   >
+<cms-contact-item [contact]="contact"></cms-contact-item>
+</div>
+</div>
