@@ -62,7 +62,7 @@ export class ContactEditComponent implements OnInit {
 
    onSubmit(form: NgForm) {
       const value = form.value;
-      const newContact = new Contact(value.id, value.name, value.email, value.phone, value.imageUrl, value.group);
+      const newContact = new Contact(value.id, value.name, value.email, value.phone, value.imageUrl, this.groupContacts);
       if (this.editMode) {
         this.contactService.updateContact(this.originalContact, newContact)
       } else {
@@ -88,73 +88,38 @@ export class ContactEditComponent implements OnInit {
   onDropContact(event: CdkDragDrop<Contact[]>) {
     const draggedContact: Contact = event.item.data;
 
-    // //Dropping into the group list
-    // if (event.container.id === 'groupContacts' && event.previousContainer.id !== 'groupContacts') {
-
-    //   // Prevent duplicate group members or the contact itself being added
-    //   if (
-    //     this.isInvalidContact(draggedContact)
-    //   ) {
-    //     this.invalidGroupContact = true;
-    //     setTimeout(() => (this.invalidGroupContact = false), 2000); //Auto hide message
-    //     return;
-    //   }
-    //   this.groupContacts.push(draggedContact);
-    // }
-
-  //   console.log('DROP EVENT:', event);
-    
-
-    if (!this.isInvalidContact(draggedContact)){
-      this.groupContacts.push(draggedContact);
+    if (this.isInvalidContact(draggedContact)) {
+      this.invalidGroupContact = true;
+      setTimeout(() => this.invalidGroupContact = false, 2000);
+      return;
     }
 
-    const selectedContact = event.item.data;
-    console.log('Dragged Contact:', selectedContact);
-    // Prevent invalid contacts from being added
-  if (!selectedContact || this.groupContacts.some(c => c.id === selectedContact.id) || selectedContact.id === this.contact?.id) {
-    return;
-  }
-    console.log('selectedContact.id', selectedContact.id);
-    // Add to groupContacts array
-    this.groupContacts.push(selectedContact);
-    //this.groupContacts.push(this.contacts[0]);
-  //  console.log('Group Contacts AFTER ADD:', this.groupContacts);
-   
+    this.groupContacts.push(draggedContact);
    }
 
    isInvalidContact(contact: Contact) {
     if (!contact) return true;
     if (contact.id === this.contact?.id) return true;
     return this.groupContacts.some((c) => c.id === contact.id);
-    // if (!contact) return true; // reject null/undefined
-
-    // if (contact.id === this.contact?.id) return true; //prevent adding self
-
-    // return this.groupContacts.some(groupMember => groupMember.id === contact.id); //prevent duplicates
-  //  if (contact || contact.id === this.contact?.id)
-  //     return true
-
-  //     return this.groupContacts.some(groupMember => groupMember.id === contact.id);
    }
-
-   addToGroup(event: CdkDragDrop<Contact[]>) {
-    console.log('DROP EVENT:', event);
-    if (!event.isPointerOverContainer) {
-      console.warn('Drop ignored: not over container');
-      return;
-    }
-    // Get the contact being dragged
-    const selectedContact = event.item.data;
-
-    // Prevent invalid contacts from being added
-  if (!selectedContact || this.groupContacts.some(c => c.id === selectedContact.id) || selectedContact.id === this.contact?.id) {
-    return;
   }
+  //  addToGroup(event: CdkDragDrop<Contact[]>) {
+  //   console.log('DROP EVENT:', event);
+  //   if (!event.isPointerOverContainer) {
+  //     console.warn('Drop ignored: not over container');
+  //     return;
+  //   }
+  //   // Get the contact being dragged
+  //   const selectedContact = event.item.data;
 
-    // Add to groupContacts array
-    this.groupContacts.push(selectedContact);
-    console.log('GROUP CONTACTS AFTER ADD:', this.groupContacts)
-   }
+  //   // Prevent invalid contacts from being added
+  // if (!selectedContact || this.groupContacts.some(c => c.id === selectedContact.id) || selectedContact.id === this.contact?.id) {
+  //   return;
+  // }
 
-}
+  //   // Add to groupContacts array
+  //   this.groupContacts.push(selectedContact);
+  //   console.log('GROUP CONTACTS AFTER ADD:', this.groupContacts)
+  //  }
+
+

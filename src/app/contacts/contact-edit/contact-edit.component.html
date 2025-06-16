@@ -98,7 +98,8 @@
 
               <div *ngFor="let contact of groupContacts; let i = index" cdkDrag [cdkDragData]="contact" class="col-12 d-flex align-items-center mb-2 draggable-contact">
                 <cms-contact-item class="col-sm-11" [contact]="contact"></cms-contact-item>
-                <button class="btn btn-danger col-sm-2 deleteButton" (click)="onRemoveItem(i)">X</button>
+                <button class="btn btn-danger col-sm-2 deleteButton" 
+                        (click)="onRemoveItem(i); $event.stopPropagation(); $event.preventDefault();">X</button>
               </div>
             <span class="dragMsg" *ngIf="groupContacts.length === 0">Drag contacts in group here</span>
           </div>
