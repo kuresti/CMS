@@ -24,11 +24,15 @@
    
     class="contact-list">
 
-<div
-    *ngFor="let contact of contacts"
+<cms-contact-item 
+     *ngFor="let contact of contacts | contactsFilter:term"
+    [contact]="contact"
     cdkDrag 
-    [cdkDragData]="contact"
-   >
-<cms-contact-item [contact]="contact"></cms-contact-item>
-</div>
+     [cdkDragData]="contact"
+    ></cms-contact-item>
+   
+    
+   
+   
+
 </div>

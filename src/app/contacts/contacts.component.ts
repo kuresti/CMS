@@ -10,11 +10,23 @@ import { ContactService } from '../contacts/contact.service';
   styleUrl: './contacts.component.css'
 })
 export class ContactsComponent implements OnInit {
-    contacts: Contact[] = [];
+    //contacts: Contact[] = [];
+    term: string = '';
+    selectedContact: Contact;
 
     constructor(private contactService: ContactService) { }
 
     ngOnInit() {
-       this.contacts = this.contactService.getContacts();
+      //  this.contactService.getContacts();
+      this.contactService.contactListChangedEvent.subscribe(
+        (contacts: Contact[]) => {
+          // this.contacts = contacts;
+          console.log('Contacts updated:', contacts);
+        }
+      );      
 }
+
+    search(value: string) {
+      this.term = value;
+    }
 }

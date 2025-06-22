@@ -22,6 +22,9 @@ export class ContactEditComponent implements OnInit {
     groupContacts: Contact[] = [];
     contacts: Contact[] = [];
     invalidGroupContact: boolean = false;
+    contactDropListId = 'contactEditList';
+    // The contactDropListId is used to identify the drop list for dragging and dropping contacts into the groupContacts array.
+    groupDropListId = 'groupContactList';
    
 
   constructor (private contactService: ContactService,
@@ -39,7 +42,7 @@ export class ContactEditComponent implements OnInit {
           
     
         }
-           this.contacts =  this.contactService.getContacts();
+          this.contactService.getContacts();
 
        this.originalContact = this.contactService.getContact(id);
        if (!this.originalContact) {
@@ -55,7 +58,7 @@ export class ContactEditComponent implements OnInit {
        if(this.contact.group) {
         this.groupContacts = this.contact.group.slice();
        }
-       this.contacts = this.contactService.getContacts();
+        this.contactService.getContacts();
       }
     );
   }
@@ -68,7 +71,7 @@ export class ContactEditComponent implements OnInit {
       } else {
         this.contactService.addContact(newContact)
       }
-      this.router.navigate(['../'], {relativeTo: this.route});
+      this.router.navigate(['/contacts'], {relativeTo: this.route});
     }
 
    onCancel() {
@@ -87,7 +90,7 @@ export class ContactEditComponent implements OnInit {
 
   onDropContact(event: CdkDragDrop<Contact[]>) {
     const draggedContact: Contact = event.item.data;
-
+    
     if (this.isInvalidContact(draggedContact)) {
       this.invalidGroupContact = true;
       setTimeout(() => this.invalidGroupContact = false, 2000);

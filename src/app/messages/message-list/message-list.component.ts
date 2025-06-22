@@ -23,7 +23,7 @@ export class MessageListComponent {
   }
 
   ngOnInit() {
-    this.messages = this.messageService.getMessages();
+    this.messageService.getMessages();
     this.messageService.messagesChanged.subscribe(
       (messages: Message[]) => {
         this.messages = messages;

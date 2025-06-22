@@ -73,9 +73,9 @@
       </div>
       <div
           cdkDropList
-          id="contactList"
+          [id]="contactDropListId"
           [cdkDropListData]="contacts"
-          [cdkDropListConnectedTo]="['groupContactList']"
+          [cdkDropListConnectedTo]="['groupDropListId']"
            (cdkDropListDropped)="onDropContact($event)"
           class="contact-list mb-3 border p-2">
         <div *ngFor="let contact of contacts" cdkDrag [cdkDragData]="contact">
@@ -87,14 +87,13 @@
           <label for="groupList">Group Contacts:</label>
 
           <div 
-              class="row" 
-              id="groupContactList"
+              class="row group-drop-zone" 
+              [id]="groupDropListId"
               cdkDropList
               [cdkDropListData]="groupContacts"
-              [cdkDropListConnectedTo]="['contactList']"
+              [cdkDropListConnectedTo]="[contactDropListId]"
               (cdkDropListDropped)="onDropContact($event)"
-              style="min-height: 3rem;"
-              class="group-drop-zone" >
+              style="min-height: 3rem;">
 
               <div *ngFor="let contact of groupContacts; let i = index" cdkDrag [cdkDragData]="contact" class="col-12 d-flex align-items-center mb-2 draggable-contact">
                 <cms-contact-item class="col-sm-11" [contact]="contact"></cms-contact-item>
